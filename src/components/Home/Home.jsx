@@ -1,8 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "../Home/Home.module.css";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
   const [isOnline, setIsOnline] = useState(true);
   const [showWelcomeImage, setShowWelcomeImage] = useState(true);
+
+  const { isAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
@@ -27,6 +32,12 @@ const Home = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate("/login");
+    }
+  }, [isAuth, navigate]);
 
   return (
     <div className={styles.container}>

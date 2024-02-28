@@ -23,13 +23,9 @@ const Login = () => {
     navigate("/registration");
   };
 
-  const handleHome = () => {
-    navigate("/");
-  };
-
   const handleLogin = () => {
     if (!emailRegex.test(email)) {
-      setErrorMsgEmail("Please enter email");
+      setErrorMsgEmail("Please enter a valid email");
       setTimeout(() => {
         setErrorMsgEmail("");
       }, 2000);
@@ -107,7 +103,6 @@ const Login = () => {
       <button onClick={handleAddUser}>Signup</button>
       <br></br>
       <br></br>
-      <button onClick={handleHome}>Home</button>
     </div>
   );
 };
